@@ -13,6 +13,14 @@ namespace ASPLessons.Controllers
             _logger = logger;
         }
 
+        public IActionResult PrintDetail()
+        {
+            int age = 23;
+            string name = "German";
+            var user = new { Name = name, Age = age};
+
+            return View(age);
+        }
         public IActionResult PrintInfo()
         {
             return View();
