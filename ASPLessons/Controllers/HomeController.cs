@@ -12,7 +12,20 @@ namespace ASPLessons.Controllers
         {
             _logger = logger;
         }
+        public IActionResult Calculate()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult Calculate(int firstNumber, int secondNumber)
+        {
+            int result = firstNumber + secondNumber;
+
+            ViewData["result"] = result;
+
+            return View();
+        }
         public IActionResult PrintDetail()
         {
             int age = 23;
