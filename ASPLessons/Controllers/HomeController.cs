@@ -8,6 +8,18 @@ namespace ASPLessons.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        public IActionResult Create() => View();
+
+        [HttpPost]
+        public string Create(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                return $"Person name:{person.Name} Person Age {person.Age}";
+            }
+            return "Data isn't valid...";
+        }
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
