@@ -1,6 +1,7 @@
 using ASPLessons.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ASPLessons.Controllers
 {
@@ -17,7 +18,22 @@ namespace ASPLessons.Controllers
             {
                 return $"Person name:{person.Name} Person Age {person.Age}";
             }
-            return "Data isn't valid...";
+
+            string errorMessage = "";
+
+            foreach (var item in ModelState)
+            {
+                if (item.Value.ValidationState == ModelValidationState.Invalid)
+                {
+                    errorMessage = $"{errorMessage}\n Error for properties {item.Key}: \n";
+
+                    foreach (var error in item.Value.Errors)
+                    {
+                        errorMessage = $"{errorMessage}{error.ErrorMessage}\n";
+                    }
+                }
+            }
+            return errorMessage;
         }
 
         public HomeController(ILogger<HomeController> logger)
