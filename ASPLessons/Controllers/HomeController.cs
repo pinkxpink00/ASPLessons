@@ -2,6 +2,7 @@ using ASPLessons.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Globalization;
 
 namespace ASPLessons.Controllers
 {
@@ -14,6 +15,16 @@ namespace ASPLessons.Controllers
         [HttpPost]
         public string Create(Person person)
         {
+            if (person.Age > 110 || person.Age < 0)
+            {
+                ModelState.AddModelError("Age","Age range must be at 0 to 110");
+            }
+
+            if (person.Name?.Length < 2)
+            {
+                ModelState.AddModelError("Name","Name Length must be large at 3");
+            }
+
             if (ModelState.IsValid)
             {
                 return $"Person name:{person.Name} Person Age {person.Age}";
