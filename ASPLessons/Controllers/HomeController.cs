@@ -17,7 +17,7 @@ namespace ASPLessons.Controllers
         {
            if (ModelState.IsValid)
             {
-               return $"{person.Name} - {person.Age}";
+               return $"{person.Name} - {person.Age}\n {person.Email}-{person.Password}";
             }
 
             return "Data isnt valid";
