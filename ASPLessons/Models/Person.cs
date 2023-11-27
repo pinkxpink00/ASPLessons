@@ -4,9 +4,14 @@ namespace ASPLessons.Models
 {
     public class Person
     {
-        [Required]
+        [Required(ErrorMessage = "Name must required")]
         public string? Name { get; set; }
-        [Required]
         public int Age { get; set; }
+        [Required(ErrorMessage = "Email must required")]
+        public string? Email {  get; set; }
+        [Required]
+        public string? Password { get; set; }
+
+
     }
 }

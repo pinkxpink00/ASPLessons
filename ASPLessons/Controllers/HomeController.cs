@@ -15,36 +15,12 @@ namespace ASPLessons.Controllers
         [HttpPost]
         public string Create(Person person)
         {
-            if (person.Age > 110 || person.Age < 0)
+           if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Age","Age range must be at 0 to 110");
+               return $"{person.Name} - {person.Age}";
             }
 
-            if (person.Name?.Length < 2)
-            {
-                ModelState.AddModelError("Name","Name Length must be large at 3");
-            }
-
-            if (ModelState.IsValid)
-            {
-                return $"Person name:{person.Name} Person Age {person.Age}";
-            }
-
-            string errorMessage = "";
-
-            foreach (var item in ModelState)
-            {
-                if (item.Value.ValidationState == ModelValidationState.Invalid)
-                {
-                    errorMessage = $"{errorMessage}\n Error for properties {item.Key}: \n";
-
-                    foreach (var error in item.Value.Errors)
-                    {
-                        errorMessage = $"{errorMessage}{error.ErrorMessage}\n";
-                    }
-                }
-            }
-            return errorMessage;
+            return "Data isnt valid";
         }
 
         public HomeController(ILogger<HomeController> logger)
